@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Ledger | Authentication</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .signature-gradient {
+            background: linear-gradient(135deg, #006591 0%, #0ea5e9 100%);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "inverse-surface": "#2d3133",
+                "secondary-container": "#d0e1fb",
+                "outline-variant": "#bec8d2",
+                "primary-fixed-dim": "#89ceff",
+                "on-error-container": "#93000a",
+                "outline": "#6e7881",
+                "on-secondary-fixed": "#0b1c30",
+                "surface-container": "#eceef0",
+                "surface-container-low": "#f2f4f6",
+                "tertiary-container": "#de8712",
+                "on-surface": "#191c1e",
+                "on-tertiary-fixed": "#2c1600",
+                "on-tertiary": "#ffffff",
+                "on-primary-container": "#003751",
+                "secondary-fixed-dim": "#b7c8e1",
+                "surface-container-lowest": "#ffffff",
+                "surface-container-high": "#e6e8ea",
+                "surface": "#f7f9fb",
+                "primary": "#006591",
+                "surface-bright": "#f7f9fb",
+                "on-tertiary-fixed-variant": "#693c00",
+                "on-primary": "#ffffff",
+                "on-secondary": "#ffffff",
+                "surface-tint": "#006591",
+                "inverse-on-surface": "#eff1f3",
+                "primary-container": "#0ea5e9",
+                "on-surface-variant": "#3e4850",
+                "error-container": "#ffdad6",
+                "on-tertiary-container": "#4d2b00",
+                "primary-fixed": "#c9e6ff",
+                "surface-dim": "#d8dadc",
+                "on-secondary-fixed-variant": "#38485d",
+                "tertiary-fixed": "#ffdcbd",
+                "on-background": "#191c1e",
+                "surface-variant": "#e0e3e5",
+                "error": "#ba1a1a",
+                "background": "#f7f9fb",
+                "on-secondary-container": "#54647a",
+                "secondary": "#505f76",
+                "tertiary": "#8a5100",
+                "on-primary-fixed-variant": "#004c6e",
+                "secondary-fixed": "#d3e4fe",
+                "on-primary-fixed": "#001e2f",
+                "tertiary-fixed-dim": "#ffb86e",
+                "on-error": "#ffffff",
+                "inverse-primary": "#89ceff",
+                "surface-container-highest": "#e0e3e5"
+              },
+              fontFamily: {
+                "headline": ["Manrope"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+      </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface antialiased overflow-x-hidden">
+<!-- Top Navigation Bar (Shared Component Logic - Suppression: Hidden on Auth) -->
+<!-- Navigation is suppressed per "Shell Visibility & Relevance" rule for Transactional pages -->
+<main class="min-h-screen flex flex-col md:flex-row items-stretch">
+<!-- Left Side: Editorial Branding & Mood -->
+<section class="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-16 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Minimalist architectural space with clean lines and soft shadows" class="w-full h-full object-cover grayscale opacity-40" data-alt="Modern minimalist architectural interior with clean concrete walls, soft natural sunlight casting geometric shadows, and a professional workspace feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcVA3JJFfccsldGbgnhnZOSH8Fq7JelN2TR-Zyox0GIfSYgjb2DWkzKNOdX_kJjoqZjgxoZbsrEPrvsPG8-xf6tjUI9tAyWhgeSACOLUfl1BuRsv2Scaryquvpp0Jb6KHAg_fYuPCR9eP9U1dIncKl4O0-RtEBm0gSTh25J34Ci1f2ccRdoOOpFxqL8SOqbx_pVTMMGuTkjJJrw_FwR-8pdx8sq1O7O1K_xLHmmF04cIMCb4lOR17A_oTFu8___Iw5HzXwAQgYZpV3"/>
+<div class="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="account_balance_wallet">account_balance_wallet</span>
+<h1 class="text-3xl font-headline font-black tracking-tighter text-on-surface">The Ledger</h1>
+</div>
+</div>
+<div class="relative z-10 max-w-lg">
+<h2 class="text-5xl font-headline font-bold leading-tight tracking-tight text-on-surface mb-8">
+                    Precision in every <br/>
+<span class="text-primary italic">single decimal.</span>
+</h2>
+<p class="text-on-surface-variant text-lg font-body leading-relaxed">
+                    Designed for the meticulous mind. An editorial approach to personal finance that balances clarity with uncompromising detail.
+                </p>
+</div>
+<div class="relative z-10 flex gap-12 font-mono text-sm tracking-widest text-on-surface-variant uppercase">
+<div class="flex flex-col gap-1">
+<span class="text-primary">01</span>
+<span>Immutable History</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-primary">02</span>
+<span>Fiscal Clarity</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-primary">03</span>
+<span>Editorial UI</span>
+</div>
+</div>
+</section>
+<!-- Right Side: Auth Forms Canvas -->
+<section class="flex-1 flex items-center justify-center p-6 md:p-12 lg:p-24 bg-surface">
+<div class="w-full max-w-md">
+<!-- Login View -->
+<div class="space-y-12" id="login-form">
+<header class="space-y-4">
+<div class="lg:hidden flex items-center gap-2 mb-8">
+<span class="material-symbols-outlined text-primary" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-headline font-black text-xl tracking-tighter">The Ledger</span>
+</div>
+<h3 class="text-4xl font-headline font-extrabold tracking-tight text-on-surface">Welcome back</h3>
+<p class="text-on-surface-variant font-body">Access your editorial financial summary.</p>
+</header>
+<form class="space-y-6">
+<div class="space-y-1">
+<label class="text-xs font-mono uppercase tracking-widest text-on-surface-variant px-1" for="email">Email Address</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-4 focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all duration-200 placeholder:text-outline-variant" id="email" placeholder="name@ledger.com" type="email"/>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between items-center px-1">
+<label class="text-xs font-mono uppercase tracking-widest text-on-surface-variant" for="password">Password</label>
+<a class="text-[10px] font-mono uppercase tracking-widest text-primary hover:text-primary-container transition-colors" href="#">Forgot?</a>
+</div>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-4 focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all duration-200 placeholder:text-outline-variant" id="password" placeholder="••••••••" type="password"/>
+</div>
+<div class="pt-4">
+<button class="signature-gradient w-full py-4 rounded-lg text-on-primary font-headline font-bold text-lg shadow-xl shadow-primary/10 hover:shadow-primary/20 active:scale-[0.98] transition-all duration-200" type="button">
+                                Sign In
+                            </button>
+</div>
+</form>
+<footer class="pt-8 border-t border-surface-container flex flex-col items-center gap-4">
+<p class="text-sm text-on-surface-variant">New to the archive?</p>
+<button class="text-xs font-mono uppercase tracking-[0.2em] text-on-surface hover:text-primary transition-colors py-2 px-6 rounded-full bg-surface-container-high" onclick="document.getElementById('login-form').classList.add('hidden'); document.getElementById('register-form').classList.remove('hidden')">
+                            Create Account
+                        </button>
+</footer>
+</div>
+<!-- Register View (Hidden by default) -->
+<div class="hidden space-y-10" id="register-form">
+<header class="space-y-4">
+<h3 class="text-4xl font-headline font-extrabold tracking-tight text-on-surface">The Registry</h3>
+<p class="text-on-surface-variant font-body">Start your professional financial journey.</p>
+</header>
+<form class="space-y-5">
+<div class="space-y-1">
+<label class="text-xs font-mono uppercase tracking-widest text-on-surface-variant px-1">Full Legal Name</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-4 focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all duration-200 placeholder:text-outline-variant" placeholder="Julian Ledger" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-mono uppercase tracking-widest text-on-surface-variant px-1">Email Address</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-4 focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all duration-200 placeholder:text-outline-variant" placeholder="name@ledger.com" type="email"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-xs font-mono uppercase tracking-widest text-on-surface-variant px-1">Password</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-4 focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all duration-200 placeholder:text-outline-variant" placeholder="••••••••" type="password"/>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-mono uppercase tracking-widest text-on-surface-variant px-1">Confirm</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-4 focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all duration-200 placeholder:text-outline-variant" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<div class="pt-6">
+<button class="signature-gradient w-full py-4 rounded-lg text-on-primary font-headline font-bold text-lg shadow-xl shadow-primary/10 hover:shadow-primary/20 active:scale-[0.98] transition-all duration-200" type="button">
+                                Open Account
+                            </button>
+</div>
+</form>
+<footer class="pt-8 border-t border-surface-container flex flex-col items-center gap-4">
+<p class="text-sm text-on-surface-variant">Already an existing member?</p>
+<button class="text-xs font-mono uppercase tracking-[0.2em] text-on-surface hover:text-primary transition-colors py-2 px-6 rounded-full bg-surface-container-high" onclick="document.getElementById('register-form').classList.add('hidden'); document.getElementById('login-form').classList.remove('hidden')">
+                            Return to Login
+                        </button>
+</footer>
+</div>
+</div>
+</section>
+</main>
+<!-- Decorative Canvas Elements -->
+<div class="fixed top-0 right-0 p-12 pointer-events-none opacity-20 hidden lg:block">
+<div class="font-mono text-[100px] leading-none font-black text-surface-container-highest select-none">
+            01/24
+        </div>
+</div>
+<!-- Small Floating Support Indicator (Editorial Style) -->
+<div class="fixed bottom-8 right-8 hidden md:flex items-center gap-4 px-6 py-3 bg-surface-container-lowest shadow-sm rounded-full border border-surface-container">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">System Status: Optimal</span>
+</div>
+</body></html>

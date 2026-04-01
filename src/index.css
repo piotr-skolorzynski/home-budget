@@ -1,2 +1,121 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes:
+    winter --default,
+    dracula;
+}
+
+@theme {
+  /* 1. Zmienne wspólne (Niezależne od motywu) */
+  --font-family-sans: "Inter", "Manrope", sans-serif;
+  --font-family-mono: "SF Mono", "Menlo", monospace;
+  --shadow-ambient: 0 20px 40px -10px rgba(25, 28, 30, 0.08);
+
+  /* 2. Mapowanie Twoich klas na zmienne DaisyUI */
+  --color-surface: var(--b1);
+  --color-on-surface: var(--bc);
+  --color-primary: var(--p);
+}
+
+/* --- MOTYW WINTER (Light) --- */
+[data-theme="winter"] {
+  /* Podstawy DaisyUI (HSL) */
+  --p: 201 100% 28%; /* Twój #006591 */
+  --pc: 201 100% 94%;
+  --b1: 210 20% 98%; /* Surface */
+  --b2: 210 20% 96%; /* Surface Container */
+  --bc: 210 15% 10%; /* On Surface */
+
+  /* Twoje specyficzne gradienty i warstwy */
+  --bg-gradient-primary: linear-gradient(135deg, #006591 0%, #0ea5e9 100%);
+  --color-surface-container-low: hsl(210, 18%, 95%);
+  --color-outline-variant: hsla(210, 30%, 65%, 0.15);
+}
+
+/* --- MOTYW DRACULA (Dark) --- */
+[data-theme="dracula"] {
+  /* Podstawy DaisyUI (Zgodne z Twoją listą Dracula) */
+  --p: 265 89% 78%; /* Dracula Purple */
+  --pc: 265 100% 10%;
+  --b1: 231 15% 18%; /* Dracula Background #282a36 */
+  --b2: 231 15% 15%;
+  --bc: 60 30% 96%; /* Dracula Foreground */
+
+  /* Twoje specyficzne gradienty i warstwy dla ciemnego motywu */
+  --bg-gradient-primary: linear-gradient(135deg, #bd93f9 0%, #ff79c6 100%);
+  --color-surface-container-low: #44475a; /* dracula-bg2 */
+  --color-outline-variant: rgba(255, 255, 255, 0.1);
+}
+
+@layer components {
+  /* 1. Primary button with signature gradient */
+  .btn-primary {
+    background-image: var(--bg-gradient-primary);
+    @apply text-white border-none transition-all duration-200 cursor-pointer;
+    @apply px-4 py-2; /* Odpowiednik 0.5rem 1rem */
+    border-radius: 0.5rem;
+
+    &:hover {
+      @apply opacity-90 scale-[1.02];
+    }
+  }
+
+  /* 2. Secondary button - tonalny, bez gradientu */
+  .btn-secondary {
+    background-color: var(--color-surface-container-high);
+    color: var(--color-on-surface);
+    @apply border-none transition-colors duration-200 cursor-pointer;
+    @apply px-4 py-2;
+    border-radius: 0.5rem;
+
+    &:hover {
+      filter: brightness(0.95);
+    }
+  }
+
+  /* 3. Tertiary button - dyskretny, tekstowy */
+  .btn-tertiary {
+    @apply bg-transparent border-none cursor-pointer transition-colors;
+    @apply px-4 py-2;
+    color: var(--color-primary);
+    border-radius: 0.5rem;
+
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--color-primary) 10%,
+        transparent
+      );
+    }
+  }
+
+  /* 4. Input styles - Editorial Ledger look */
+  .input-container {
+    background-color: var(--color-surface-container-low);
+    @apply transition-all duration-300;
+
+    /* Stan focusu zintegrowany w jedną klasę lub przez focus-within */
+    &:focus-within,
+    &.input-focused {
+      background-color: var(--color-surface-container-lowest);
+      outline: 2px solid
+        color-mix(in srgb, var(--color-primary) 20%, transparent);
+      outline-offset: -2px;
+    }
+  }
+
+  /* 5. Financial card - Serce systemu "The Editorial Ledger" */
+  .financial-card {
+    background-color: var(--b1); /* Pobiera base-100 z aktualnego motywu */
+    color: var(--bc); /* Pobiera base-content */
+    @apply p-8 shadow-ambient border-none; /* Spacing-8 z Twojej specyfikacji (2rem) */
+    border-radius: 1rem;
+
+    /* Wymuszenie czcionki mono dla wszystkich liczb wewnątrz karty */
+    & .amount,
+    & .date,
+    & table td {
+      @apply font-mono;
+    }
+  }
+}
