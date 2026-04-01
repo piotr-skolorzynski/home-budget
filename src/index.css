@@ -118,4 +118,39 @@
       @apply font-mono;
     }
   }
+
+  /* 6. Glassmorphic navigation - Editorial Ledger header */
+  .glass-nav {
+    background-color: color-mix(in srgb, var(--color-surface) 80%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid
+      color-mix(in srgb, var(--color-outline-variant) 50%, transparent);
+
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--color-surface) 85%,
+        transparent
+      );
+    }
+  }
+
+  /* 7. Menu items with tonal layering */
+  .menu-glass {
+    @apply bg-base-100/80 hover:bg-primary/5;
+    border: 1px solid transparent;
+
+    &:hover {
+      border-color: color-mix(
+        in srgb,
+        var(--color-outline-variant) 30%,
+        transparent
+      );
+    }
+  }
+
+  /* 8. Ambient shadows for premium feel */
+  .shadow-ambient {
+    box-shadow: var(--shadow-ambient);
+  }
 }
