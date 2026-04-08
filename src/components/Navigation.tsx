@@ -1,7 +1,7 @@
 import ThemeToggle from "./ThemeToggle";
 import { useLocation, Link } from "react-router";
 
-export default function Navigation() {
+const Navigation = () => {
   const location = useLocation();
 
   return (
@@ -97,4 +97,6 @@ export default function Navigation() {
       </nav>
     </header>
   );
-}
+};
+
+export default Navigation;

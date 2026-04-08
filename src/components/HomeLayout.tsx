@@ -1,3 +1,4 @@
+import FinancialStatWrapper from "./FinancialStatWrapper";
 import Navigation from "./Navigation";
 
 const HomeLayout = () => {
@@ -9,6 +10,7 @@ const HomeLayout = () => {
           <div className="card-body">
             <h1 className="card-title">Welcome to Home Budget</h1>
             <p>Start managing your finances with our premium design system.</p>
+            <FinancialStatWrapper />
             <div className="card-actions">
               <button className="btn btn-primary">Get Started</button>
             </div>

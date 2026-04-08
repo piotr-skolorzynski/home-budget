@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Sun, Moon } from "lucide-react";
 
-export default function ThemeToggle() {
+const ThemeToggle = () => {
   const [isDark, setIsDark] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
     const systemPrefersDark = window.matchMedia(
@@ -39,4 +39,6 @@ export default function ThemeToggle() {
       <Moon size={18} className="dark:hidden inline" />
     </button>
   );
-}
+};
+
+export default ThemeToggle;
